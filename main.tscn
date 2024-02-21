@@ -1,9 +1,61 @@
-[gd_scene load_steps=2 format=3 uid="uid://csmo7r1l8ik2u"]
+[gd_scene load_steps=7 format=3 uid="uid://csmo7r1l8ik2u"]
 
-[ext_resource type="Texture2D" uid="uid://dd4y4g3h0bqi7" path="res://icon.svg" id="1_827l8"]
+[ext_resource type="Script" path="res://cards.gd" id="1_cmntp"]
+[ext_resource type="Texture2D" uid="uid://1a574kx07wxb" path="res://FourSoulsBackground.png" id="1_r5a08"]
+[ext_resource type="Texture2D" uid="uid://p1fyj4nctmbp" path="res://IssacCard.png" id="3_cjllo"]
+[ext_resource type="PackedScene" uid="uid://cf36eh7drfk3d" path="res://Scenes/card_ui.tscn" id="4_gyp7a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4tky3"]
+size = Vector2(212.281, 280.636)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vbu6"]
+size = Vector2(1156, 322)
 
 [node name="Main" type="Node2D"]
+position = Vector2(300, 200)
+metadata/_edit_lock_ = true
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(560, 332)
-texture = ExtResource("1_827l8")
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-302, -196)
+scale = Vector2(1.39531, 1.40234)
+texture = ExtResource("1_r5a08")
+centered = false
+
+[node name="cards" type="Node2D" parent="."]
+script = ExtResource("1_cmntp")
+
+[node name="Sprite2D" type="Sprite2D" parent="cards"]
+position = Vector2(376.5, 277)
+scale = Vector2(0.719048, 0.637681)
+texture = ExtResource("3_cjllo")
+
+[node name="Area2D" type="Area2D" parent="cards/Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cards/Sprite2D/Area2D"]
+position = Vector2(-1.64075, -0.818298)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_4tky3")
+
+[node name="CardDropArea" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardDropArea"]
+position = Vector2(278, -34)
+shape = SubResource("RectangleShape2D_6vbu6")
+
+[node name="BattleUI" type="CanvasLayer" parent="."]
+
+[node name="Hand" type="HBoxContainer" parent="BattleUI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CardUI" parent="BattleUI/Hand" instance=ExtResource("4_gyp7a")]
+layout_mode = 2
+
+[node name="CardUI2" parent="BattleUI/Hand" instance=ExtResource("4_gyp7a")]
+layout_mode = 2
+
+[node name="CardUI3" parent="BattleUI/Hand" instance=ExtResource("4_gyp7a")]
+layout_mode = 2
+
+[connection signal="input_event" from="cards/Sprite2D/Area2D" to="cards" method="_on_area_2d_input_event"]
