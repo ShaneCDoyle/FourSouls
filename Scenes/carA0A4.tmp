@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Scenes/Card_UI/card_states/card_released_state.gd" id="7_07esl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p6x5g"]
-size = Vector2(199, 224)
+size = Vector2(250.5, 301)
 
 [node name="CardUI" type="Control"]
 custom_minimum_size = Vector2(250, 300)
@@ -53,7 +53,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropPointDetector"]
-position = Vector2(123.5, 149)
+position = Vector2(125.75, 149.5)
 shape = SubResource("RectangleShape2D_p6x5g")
 
 [node name="CardStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
